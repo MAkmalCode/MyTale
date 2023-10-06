@@ -1,5 +1,6 @@
 package com.malbyte.mytale.ui.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -9,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.malbyte.mytale.R
 import com.malbyte.mytale.data.factory.ViewModelFactory
 import com.malbyte.mytale.databinding.ActivityHomeBinding
+import com.malbyte.mytale.ui.detail.DetailActivity
 import com.malbyte.mytale.ui.home.state.HomeState
 
 class HomeActivity : AppCompatActivity() {
@@ -35,7 +37,11 @@ class HomeActivity : AppCompatActivity() {
                     loadingBar.isVisible = true
                 }
                 is HomeState.Success -> {
-                    val adapter = StoryAdapter(it.list)
+                    val adapter = StoryAdapter(it.list) {id ->
+                        val intent = Intent(this@HomeActivity, DetailActivity::class.java)
+                        intent.putExtra("id", id)
+                        startActivity(intent)
+                    }
                     Toast.makeText(this, it.list.toString(), Toast.LENGTH_SHORT).show()
                     storyRV.adapter = adapter
                     loadingBar.isVisible = false

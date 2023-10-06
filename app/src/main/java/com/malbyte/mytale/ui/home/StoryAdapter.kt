@@ -7,9 +7,9 @@ import coil.load
 import com.malbyte.mytale.data.source.remote.models.Story
 import com.malbyte.mytale.databinding.ItemStoryBinding
 
-class StoryAdapter(private val listStory: List<Story>) :
+class StoryAdapter(private val listStory: List<Story>, private val click: ((id:String) -> Unit)?) :
     RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
-    class StoryViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    class StoryViewHolder(val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story){
             with(binding){
                 binding.image.load(story.photoUrl)
@@ -29,6 +29,10 @@ class StoryAdapter(private val listStory: List<Story>) :
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        holder.bind(listStory[position])
+        val story = listStory[position]
+        holder.bind(story)
+        holder.binding.root.setOnClickListener{
+            click?.invoke(story.id)
+        }
     }
 }
