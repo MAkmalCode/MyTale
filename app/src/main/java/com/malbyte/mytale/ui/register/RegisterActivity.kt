@@ -17,7 +17,7 @@ import com.malbyte.mytale.ui.register.state.RegisterState
 class RegisterActivity : AppCompatActivity() {
     private val binding : ActivityRegisterBinding by viewBinding()
     private val viewModel : RegisterViewModel by viewModels {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(application)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

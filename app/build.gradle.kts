@@ -33,7 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
@@ -68,5 +68,11 @@ dependencies {
     implementation("io.coil-kt:coil:2.4.0")
 
     // KotPref
-    implementation ("com.chibatching.kotpref:kotpref:2.13.1")
+    implementation("com.chibatching.kotpref:kotpref:2.13.1")
+
+    // image picker
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+
+    //location
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }

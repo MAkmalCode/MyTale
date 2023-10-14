@@ -15,7 +15,7 @@ import com.malbyte.mytale.ui.detail.state.DetailState
 class DetailActivity : AppCompatActivity() {
     private val binding : ActivityDetailBinding by viewBinding()
     private val viewModel : DetailViewModel by viewModels{
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(application)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,8 @@ class DetailActivity : AppCompatActivity() {
         val image = binding.ivDetailImage
         val name = binding.tvDetailName
         val desk = binding.tvDetailDeskripsi
+        val lat = binding.tvDetailLat
+        val lon = binding.tvDetailLon
 
         val id= intent.getStringExtra("id") ?: "osjsfjneifgefjn"
         viewModel.getDetail(id)
@@ -44,6 +46,8 @@ class DetailActivity : AppCompatActivity() {
                     name.text = it.story.name
                     desk.text = it.story.description
                     loadingBar.isVisible = false
+                    lat.text = "Latitude: ${it.story.lat}"
+                    lon.text = "Longtitude: ${it.story.lon}"
                 }
             }
         }

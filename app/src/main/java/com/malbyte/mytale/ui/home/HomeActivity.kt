@@ -10,22 +10,28 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.malbyte.mytale.R
 import com.malbyte.mytale.data.factory.ViewModelFactory
 import com.malbyte.mytale.databinding.ActivityHomeBinding
+import com.malbyte.mytale.ui.add_story.AddStoryActivity
 import com.malbyte.mytale.ui.detail.DetailActivity
 import com.malbyte.mytale.ui.home.state.HomeState
 
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by viewBinding()
     private val viewModel: HomeVIewModel by viewModels {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(application)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getAllStory()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        viewModel.getAllStory()
 
         val storyRV = binding.rvStory
         val loadingBar = binding.loadingBar
 
+        binding.btnHomeAddStory.isVisible = false
         loadingBar.isVisible = true
         viewModel.StoryState.observe(this){
             when(it){
@@ -45,6 +51,12 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this, it.list.toString(), Toast.LENGTH_SHORT).show()
                     storyRV.adapter = adapter
                     loadingBar.isVisible = false
+
+                    binding.btnHomeAddStory.isVisible = true
+                    binding.btnHomeAddStory.setOnClickListener {
+                        val intent = Intent(this@HomeActivity, AddStoryActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
         }

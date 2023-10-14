@@ -19,7 +19,7 @@ import com.malbyte.mytale.ui.register.RegisterActivity
 class LoginActivity : AppCompatActivity() {
     private val binding : ActivityLoginBinding by viewBinding()
     private val viewModel : LoginViewModel by viewModels{
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(application)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

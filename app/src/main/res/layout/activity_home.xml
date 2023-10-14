@@ -18,11 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_home_add_story"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Add Story"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:spanCount="2"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
-
 </LinearLayout>
